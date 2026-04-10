@@ -5,7 +5,7 @@ import { apiFetch, initApiAuth } from "../../utils/api";
 import {
   BarChart2, ShoppingBag, Users, TrendingUp,
   PackageCheck, ChevronDown, ToggleLeft, ToggleRight,
-  LogOut, RefreshCw,
+  LogOut, RefreshCw, Eye,
 } from "lucide-react";
 
 const STATUS_LABELS = {
@@ -162,7 +162,10 @@ function AdminPanel() {
       {/* Header */}
       <div className="bg-white border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div 
+            onClick={() => navigate("/")}
+            className="flex items-center gap-3 cursor-pointer hover:opacity-80 transition"
+          >
             <span className="text-2xl">🍽️</span>
             <div>
               <h1 className="font-black text-gray-900 text-lg leading-none">FoodDelish</h1>
@@ -170,6 +173,14 @@ function AdminPanel() {
             </div>
           </div>
           <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate("/")}
+              className="flex items-center gap-2 text-sm text-gray-500 hover:text-[rgb(252,90,9)] transition font-medium"
+            >
+              <Eye className="w-4 h-4" />
+              <span className="hidden xs:inline">View Site</span>
+            </button>
+            <div className="w-px h-4 bg-gray-200 mx-1 hidden xs:block" />
             <span className="text-sm text-gray-500 hidden sm:block">
               Welcome, <strong className="text-gray-800">{user?.name}</strong>
             </span>
