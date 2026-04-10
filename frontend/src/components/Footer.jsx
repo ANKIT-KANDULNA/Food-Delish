@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Footer(){
     return (
         <div className="bg-[#1f1f1f] text-gray-300 px-6 md:px-16 py-8 md:py-12">
@@ -9,30 +11,30 @@ function Footer(){
                 <div>
                     <h3 className="text-white font-semibold mb-4">Company</h3>
                     <nav className="flex flex-col gap-2 text-sm">
-                    <a href="#" className="hover:text-orange-400 transition">About</a>
-                    <a href="#" className="hover:text-orange-400 transition">Careers</a>
-                    <a href="#" className="hover:text-orange-400 transition">Blog</a>
-                    <a href="#" className="hover:text-orange-400 transition">Terms</a>
+                    <Link to="/about" className="hover:text-orange-400 transition">About</Link>
+                    <Link to="/careers" className="hover:text-orange-400 transition">Careers</Link>
+                    <Link to="/about" className="hover:text-orange-400 transition">Blog</Link>
+                    <Link to="/terms" className="hover:text-orange-400 transition">Terms</Link>
                     </nav>
                 </div>
 
                 <div>
                     <h3 className="font-semibold text-white mb-3">Support</h3>
                     <nav className="flex flex-col gap-2 text-sm">
-                    <a href="#" className="hover:text-orange-400 transition">Help Center</a>
-                    <a href="#" className="hover:text-orange-400 transition">Contact Us</a>
-                    <a href="#" className="hover:text-orange-400 transition">FAQs</a>
-                    <a href="#" className="hover:text-orange-400 transition">Customer Care</a>
+                    <Link to="/privacy" className="hover:text-orange-400 transition">Help Center</Link>
+                    <Link to="/about" className="hover:text-orange-400 transition">Contact Us</Link>
+                    <Link to="/about" className="hover:text-orange-400 transition">FAQs</Link>
+                    <Link to="/privacy" className="hover:text-orange-400 transition">Customer Care</Link>
                     </nav>
                 </div>
 
                 <div>
                     <h3 className="font-semibold text-white mb-3">Explore</h3>
                     <nav className="flex flex-col gap-2 text-sm">
-                    <a href="#" className="hover:text-orange-400 transition">Menu</a>
-                    <a href="#" className="hover:text-orange-400 transition">Offers</a>
-                    <a href="#" className="hover:text-orange-400 transition">Restaurants</a>
-                    <a href="#" className="hover:text-orange-400 transition">Track Order</a>
+                    <Link to="/menu" className="hover:text-orange-400 transition">Menu</Link>
+                    <Link to="/menu" className="hover:text-orange-400 transition">Offers</Link>
+                    <Link to="/" className="hover:text-orange-400 transition">Restaurants</Link>
+                    <Link to="/orders" className="hover:text-orange-400 transition">Track Order</Link>
                     </nav>
                 </div>
 
