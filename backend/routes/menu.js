@@ -25,7 +25,6 @@ router.get("/", async (req, res) => {
 
     const sortMap = {
       name:   { name: 1 },
-      price:  { price: 1 },
       rating: { averageRating: -1 },
     };
 
@@ -70,7 +69,7 @@ router.get("/:id", async (req, res) => {
 
 const itemValidation = [
   body("name").trim().notEmpty().withMessage("Name is required"),
-  body("price").isFloat({ min: 0 }).withMessage("Price must be a positive number"),
+  body("prices").isObject().withMessage("Prices must be an object (e.g. { half: 100 })"),
   body("category").trim().notEmpty().withMessage("Category is required"),
 ];
 

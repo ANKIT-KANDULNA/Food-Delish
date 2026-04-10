@@ -31,7 +31,9 @@ function App() {
   const addToCart = (item) => {
     const id = item.id || item._id || item.name;
     setCartItems(prev => {
-      const idx = prev.findIndex(i => (i.id || i._id || i.name) === id);
+      const idx = prev.findIndex(i => 
+        (i.id || i._id || i.name) === id && i.variant === item.variant
+      );
       if (idx !== -1) {
         const updated = [...prev];
         updated[idx] = { ...updated[idx], quantity: (updated[idx].quantity || 1) + 1 };

@@ -4,11 +4,16 @@ const menuItemSchema = new mongoose.Schema(
   {
     name:        { type: String, required: true, trim: true, index: true },
     description: { type: String, trim: true },
-    price:       { type: Number, required: true, min: 0 },
+    prices:      { type: Map, of: Number, required: true }, // e.g. { half: 100, full: 200 }
     category:    { type: String, required: true, index: true },
     image:       { type: String },                          // Cloudinary URL
     isVeg:       { type: Boolean, default: false },
     isAvailable: { type: Boolean, default: true, index: true },
+
+    // Detailed Info
+    ingredients: [{ type: String }],
+    calories:    { type: Map, of: Number },
+    spiceLevel:  { type: String, enum: ["mild", "medium", "high"], default: "medium" },
 
     // Tags for filtering
     tags: [{ type: String }],

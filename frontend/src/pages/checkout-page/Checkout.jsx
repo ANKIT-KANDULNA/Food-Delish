@@ -61,6 +61,7 @@ function Checkout({ cartItems, setCartItems }) {
         items: cartItems.map(item => ({
           menuItemId: item.id || item._id || item.name,
           name:       item.name,
+          variant:    item.variant || "Regular",
           price:      item.price,
           quantity:   item.quantity || 1,
           image:      item.image || "",

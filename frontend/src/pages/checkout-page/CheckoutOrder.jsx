@@ -51,7 +51,9 @@ function CheckoutOrder({ cartItems, setCartItems, discount, onPlaceOrder, loadin
                 )}
                 <div className="flex flex-col">
                   <span className="font-semibold text-gray-800 text-sm">{item.name}</span>
-                  <span className="text-xs text-gray-400">{item.category}</span>
+                  <span className="text-xs text-gray-400">
+                    {item.category} {item.variant && `• ${item.variant}`}
+                  </span>
                   <div className="flex items-center gap-2 mt-1">
                     <button
                       onClick={() => decreaseQty(index)}

@@ -69,7 +69,13 @@ app.use(
       directives: {
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
         "img-src": ["'self'", "data:", "https:"],
-        "connect-src": ["'self'", "https://food-delish.onrender.com", "https://*.firebaseio.com", "https://*.googleapis.com"],
+        "connect-src": [
+          "'self'", 
+          "https://food-delish.onrender.com", 
+          "https://food-delish-api.onrender.com", 
+          "https://*.firebaseio.com", 
+          "https://*.googleapis.com"
+        ],
       },
     },
   })
