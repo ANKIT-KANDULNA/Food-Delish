@@ -40,8 +40,9 @@ function Register() {
       const data = await res.json();
       if (!res.ok) return setError(data.message);
 
-      // Register successful, redirect to login
-      navigate("/login");
+      // Auto-login successful
+      login({ name: data.name, role: data.role, photo: data.photo }, data.accessToken);
+      navigate("/");
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
