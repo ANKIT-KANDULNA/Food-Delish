@@ -10,14 +10,16 @@ function HomepageMenu({addToCart}){
     },[]);
 
     return (
-        <div className="bg-[rgb(252,90,9)] p-8 text-white">
-            <p className="text-center text-3xl font-bold">Explore our Menu</p>
+        <div className="bg-[rgb(252,90,9)] p-4 md:p-8 text-white">
+            <p className="text-center text-2xl md:text-3xl font-bold">Explore our Menu</p>
 
-            <p className="text-2xl font-semibold m-6">Bestsellers</p>
+            <p className="text-xl md:text-2xl font-semibold m-4 md:m-6">Bestsellers</p>
 
-            <div className="mmt-6 flex gap-6 overflow-x-auto scrollbar-hide px-2 justify-items-center">
+            <div className="mt-4 md:mt-6 flex gap-4 md:gap-6 overflow-x-auto snap-x scrollbar-hide px-2 items-center">
                 {items.map((item)=>(
-                    <HomeMenuCard key={item.id || item._id} item={item} addToCart={addToCart}/>
+                    <div key={item.id || item._id} className="snap-center shrink-0">
+                        <HomeMenuCard item={item} addToCart={addToCart}/>
+                    </div>
                 ))}
             </div>
             

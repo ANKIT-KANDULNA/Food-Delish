@@ -31,8 +31,8 @@ function CheckoutOrder({ cartItems, setCartItems }){
   const grandTotal = totalPrice + deliveryFee + tax;
 
   return (
-    <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 h-fit sticky top-24">
-      <div className="flex items-center justify-between mb-8">
+    <div className="bg-white p-5 sm:p-8 rounded-3xl shadow-sm border border-gray-100 h-fit lg:sticky lg:top-24">
+      <div className="flex items-center justify-between mb-6 sm:mb-8">
         <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
           <ShoppingBag className="w-5 h-5 text-[rgb(252,90,9)]" />
           Your Order

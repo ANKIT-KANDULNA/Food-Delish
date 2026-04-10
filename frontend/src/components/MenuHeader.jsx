@@ -17,14 +17,14 @@ function MenuHeader({searchQuery,setSearchQuery,menuData}){
 
     return (
         <div className="flex flex-col gap-4 p-4 relative">
-            <div className="flex justify-between items-center">
-                <a className="text-3xl font-bold text-[rgb(252,90,9)] cursor-pointer" onClick={() => navigate("/")}>
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <a className="text-2xl sm:text-3xl font-bold text-[rgb(252,90,9)] cursor-pointer" onClick={() => navigate("/")}>
                     FOOD DELiSH
                 </a>
 
                 {user && (
-                    <div className="flex items-center gap-4">
-                        <span className="font-medium text-gray-700">Hi, {user.name} 👋</span>
+                    <div className="flex items-center gap-2 sm:gap-4">
+                        <span className="font-medium text-gray-700 text-sm sm:text-base">Hi, {user.name} 👋</span>
                         <button
                             onClick={() => { logout(); navigate("/login"); }}
                             className="px-4 py-1 rounded-full border border-[rgb(252,90,9)] text-[rgb(252,90,9)] hover:bg-[rgb(252,90,9)] hover:text-white transition">

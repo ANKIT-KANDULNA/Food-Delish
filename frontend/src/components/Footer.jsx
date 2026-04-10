@@ -1,11 +1,11 @@
 function Footer(){
     return (
-        <div className="bg-[#1f1f1f] text-gray-300 px-16 py-12">
-            <h2 className="text-2xl font-bold text-orange-500 mb-10">
+        <div className="bg-[#1f1f1f] text-gray-300 px-6 md:px-16 py-8 md:py-12">
+            <h2 className="text-2xl font-bold text-orange-500 mb-8 md:mb-10 text-center md:text-left">
                 FOOD DELiSH
             </h2>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 text-center sm:text-left">
                 <div>
                     <h3 className="text-white font-semibold mb-4">Company</h3>
                     <nav className="flex flex-col gap-2 text-sm">

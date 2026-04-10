@@ -15,7 +15,7 @@ function CheckoutHeader() {
           </Link>
         </div>
 
-        <h3 className="text-2xl font-extrabold tracking-wide text-[rgb(252,90,9)]">FOOD DELiSH</h3>
+        <h3 className="text-xl sm:text-2xl font-extrabold tracking-wide text-[rgb(252,90,9)]">FOOD DELiSH</h3>
 
         <div className="flex-1 flex justify-end">
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-full border border-gray-100">
