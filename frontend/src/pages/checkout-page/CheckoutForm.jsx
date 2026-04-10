@@ -2,11 +2,11 @@ import { useState } from "react";
 import { User, Phone, MapPin, Home, Tag } from "lucide-react";
 
 const FIELDS = [
-  { name: "fullName",    label: "Full Name",      icon: User,   col: 1, type: "text",  placeholder: "Raj Sharma" },
-  { name: "phone",       label: "Phone Number",   icon: Phone,  col: 2, type: "tel",   placeholder: "+91 98765 43210" },
-  { name: "addressLine", label: "Street Address", icon: MapPin, col: 2, type: "text",  placeholder: "B-12, MG Road" },
-  { name: "city",        label: "City",           icon: Home,   col: 1, type: "text",  placeholder: "Mumbai" },
-  { name: "pincode",     label: "Pin Code",       icon: null,   col: 1, type: "text",  placeholder: "400001" },
+  { name: "fullName", label: "Full Name", icon: User, col: 1, type: "text", placeholder: "Tu Yung" },
+  { name: "phone", label: "Phone Number", icon: Phone, col: 2, type: "tel", placeholder: "+91 98765 43210" },
+  { name: "addressLine", label: "Street Address", icon: MapPin, col: 2, type: "text", placeholder: "G-Point, Dholakpur" },
+  { name: "city", label: "City", icon: Home, col: 1, type: "text", placeholder: "Delhi" },
+  { name: "pincode", label: "Pin Code", icon: null, col: 1, type: "text", placeholder: "110001" },
 ];
 
 function CheckoutForm({ address, onChange, promoCode, onPromoChange, promoApplied, onApplyPromo }) {
