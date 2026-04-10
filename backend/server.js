@@ -38,22 +38,40 @@ connectDB();
 
 // ─── Core Security Middleware ─────────────────────────────────────────────────
 
-// Secure HTTP headers
-app.use(helmet());
-
-// CORS — allow frontend origins + credentials (for cookies)
+// CORS — must be early to handle preflight requests
 const ALLOWED_ORIGINS = [
   "https://food-delish.vercel.app",
   "http://localhost:5173",
   "http://localhost:3000",
 ];
+
 app.use(
   cors({
     origin: (origin, cb) => {
-      if (!origin || ALLOWED_ORIGINS.includes(origin)) return cb(null, true);
-      cb(new Error("Not allowed by CORS"));
+      // Allow requests with no origin (like mobile apps or curl) or allowed origins
+      if (!origin || ALLOWED_ORIGINS.includes(origin)) {
+        cb(null, true);
+      } else {
+        cb(new Error("Not allowed by CORS"));
+      }
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
+  })
+);
+
+// Secure HTTP headers
+app.use(
+  helmet({
+    crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" },
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "img-src": ["'self'", "data:", "https:"],
+        "connect-src": ["'self'", "https://food-delish.onrender.com", "https://*.firebaseio.com", "https://*.googleapis.com"],
+      },
+    },
   })
 );
 
