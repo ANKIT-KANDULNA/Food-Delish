@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBKaXCWQlpxgMbccnE4haPmcZptqvshqG0",
-  authDomain: "fooddelish-3284a.firebaseapp.com",
-  projectId: "fooddelish-3284a",
-  storageBucket: "fooddelish-3284a.firebasestorage.app",
-  messagingSenderId: "242244897941",
-  appId: "1:242244897941:web:850dde2bf68854f1031f9c"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);
