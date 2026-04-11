@@ -7,3 +7,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Used by horizontal carousels (e.g. Homepage bestsellers, Deal mobile row) */
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

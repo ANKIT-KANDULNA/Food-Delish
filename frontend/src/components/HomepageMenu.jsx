@@ -15,9 +15,9 @@ function HomepageMenu({addToCart}){
 
             <p className="text-xl md:text-2xl font-semibold m-4 md:m-6">Bestsellers</p>
 
-            <div className="mt-4 md:mt-6 flex gap-4 md:gap-6 overflow-x-auto snap-x scrollbar-hide px-2 items-center">
+            <div className="mt-4 md:mt-6 flex gap-4 md:gap-6 overflow-x-auto snap-x scrollbar-hide px-2 items-stretch">
                 {items.map((item)=>(
-                    <div key={item.id || item._id} className="snap-center shrink-0">
+                    <div key={item.id || item._id} className="snap-center shrink-0 flex">
                         <HomeMenuCard item={item} addToCart={addToCart}/>
                     </div>
                 ))}
