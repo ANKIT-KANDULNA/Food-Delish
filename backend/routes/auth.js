@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { normalizeEmail } = require("validator");
 const { body, validationResult } = require("express-validator");
 const User = require("../models/User");
 const logger = require("../utils/logger");
@@ -34,18 +35,26 @@ function sendRefreshCookie(res, token) {
   });
 }
 
+/** Gmail-style addresses: Firebase may store dots/+tags; register/login use normalizeEmail (dots removed). */
+function emailLookupVariants(rawEmail) {
+  const trimmed = (rawEmail || "").trim();
+  const lower = trimmed.toLowerCase();
+  const normalized = normalizeEmail(trimmed) || lower;
+  return [...new Set([normalized, lower])];
+}
+
 // ─── Validation rules ────────────────────────────────────────────────────────
 
 const registerValidation = [
   body("name").trim().notEmpty().withMessage("Name is required").isLength({ max: 60 }),
-  body("email").isEmail().normalizeEmail().withMessage("Invalid email"),
+  body("email").trim().notEmpty().withMessage("Invalid email").isEmail().withMessage("Invalid email"),
   body("password")
     .isLength({ min: 6 })
     .withMessage("Password must be at least 6 characters"),
 ];
 
 const loginValidation = [
-  body("email").isEmail().normalizeEmail().withMessage("Invalid email"),
+  body("email").trim().notEmpty().withMessage("Invalid email").isEmail().withMessage("Invalid email"),
   body("password").notEmpty().withMessage("Password is required"),
 ];
 
@@ -59,13 +68,16 @@ router.post("/register", registerValidation, async (req, res) => {
   }
 
   try {
-    const { name, email, password } = req.body;
+    const { name, password } = req.body;
+    const trimmed = req.body.email.trim();
+    const canonical = normalizeEmail(trimmed) || trimmed.toLowerCase();
+    const variants = emailLookupVariants(trimmed);
 
-    const existing = await User.findOne({ email });
+    const existing = await User.findOne({ email: { $in: variants } });
     if (existing) return res.status(409).json({ message: "Email already registered" });
 
     const hashed = await bcrypt.hash(password, 12);
-    const user = await User.create({ name, email, password: hashed });
+    const user = await User.create({ name, email: canonical, password: hashed });
 
     // Auto-login: generate tokens
     const payload = { id: user._id, email: user.email, name: user.name, role: user.role };
@@ -77,7 +89,7 @@ router.post("/register", registerValidation, async (req, res) => {
 
     sendRefreshCookie(res, refreshToken);
 
-    logger.info("New user registered and logged in", { email });
+    logger.info("New user registered and logged in", { email: canonical });
     res.status(201).json({ 
       accessToken, 
       name: user.name, 
@@ -101,9 +113,16 @@ router.post("/login", loginValidation, async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
-    if (!user || !user.password) {
+    const variants = emailLookupVariants(email);
+    const user = await User.findOne({ email: { $in: variants } });
+    if (!user) {
       return res.status(401).json({ message: "Invalid email or password" });
+    }
+    if (!user.password) {
+      return res.status(401).json({
+        message:
+          "This account uses Google sign-in. Use “Continue with Google”, or register with email and password.",
+      });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -184,10 +203,17 @@ router.post("/google", async (req, res) => {
     const { name, email, photo } = req.body;
     if (!email) return res.status(400).json({ message: "Email is required" });
 
-    let user = await User.findOne({ email });
+    const trimmed = email.trim();
+    const canonical = normalizeEmail(trimmed) || trimmed.toLowerCase();
+    const variants = emailLookupVariants(trimmed);
+
+    let user = await User.findOne({ email: { $in: variants } });
     if (!user) {
-      user = await User.create({ name, email, photo });
-      logger.info("New Google user created", { email });
+      user = await User.create({ name, email: canonical, photo });
+      logger.info("New Google user created", { email: canonical });
+    } else if (user.email !== canonical) {
+      user.email = canonical;
+      await user.save();
     }
 
     const payload = { id: user._id, email: user.email, name: user.name, role: user.role };
