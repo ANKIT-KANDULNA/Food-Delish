@@ -5,7 +5,7 @@
  *        const data = await apiFetch("/api/orders/my");
  */
 
-const API_BASE = import.meta.env.VITE_API_URL;
+const API_BASE = import.meta.env.VITE_API_URL ?? "";
 
 // We store a reference to the AuthContext helpers outside React
 // so this module can call them without prop-drilling.

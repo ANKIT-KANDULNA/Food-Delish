@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { auth, googleProvider } from "../firebase";
 import { signInWithPopup } from "firebase/auth";
 
-const API = import.meta.env.VITE_API_URL;
+const API = import.meta.env.VITE_API_URL ?? "";
 
 function Register() {
   const [name, setName] = useState("");
